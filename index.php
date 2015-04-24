@@ -4,8 +4,6 @@ header('Content-Type: text/html; charset=utf-8');
 
 require_once 'ilceler.php';
 $DB->exec("SET names utf8");
-//$ilce = 0;
-//echo $ilcelerveri[$ilce][0];
 
 for ($ilce = 0; $ilce < count($ilcelerveri); $ilce++) {
 
@@ -15,7 +13,6 @@ preg_match_all('/<table>(.*?)<\/table>/is', curl($url),
         
 // $veri_derece_2[1][0] // tr içerisinde kopmle eczaneler
 
-echo "<h2>".$ilcelerveri[$ilce][0]."</h2>";
 preg_match_all(
         '/<strong>(.*?)<\/strong>.*?<div align="right">Eczacı : <div\/><\/td><td height="25" bgcolor="#e8e8e8">(.*?)<\/td><\/tr>.*?<div align="right">Adres : <div\/><\/td><td height="25" bgcolor="#e8e8e8">(.*?)<\/td><\/tr><tr>.*?<div align="right">Tel : <div\/><\/td><td height="25" bgcolor="#e8e8e8">(.*?)<\/td><\/tr><tr>.*?<div align="right">Fax : <div\/><\/td><td height="25" bgcolor="#e8e8e8">(.*?)<\/td>/is', 
         $veri_derece_2[1][0], $veri_derece_3); // ilçede tablonun içinde eczane
@@ -24,7 +21,6 @@ preg_match_all(
         $ilceId = $ilce+1;
         $query = $DB->exec("INSERT INTO eczaneler VALUES (null,'".$ilceId."','".$veri_derece_3[1][$eczane]."','".$veri_derece_3[2][$eczane]."','".$veri_derece_3[3][$eczane]."','".$veri_derece_3[4][$eczane]."','".$veri_derece_3[5][$eczane]."', null)");
         //sleep(1);
-        echo "<b>".$veri_derece_3[1][$eczane]."</b>";
         
     }                                          
 }
