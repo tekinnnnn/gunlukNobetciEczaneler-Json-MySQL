@@ -12,7 +12,7 @@ $data = array();
 for ($i = 0; $i < count($ilcelerArray); $i ++) {
     $ilce = $ilcelerArray[$i]["ilce"];
     $ilce_id = $ilcelerArray[$i]["id"];
-    $eczanelerArray = $DB->query("SELECT * FROM eczaneler WHERE ilce_id = " . $ilce_id);
+    $eczanelerArray = $DB->query("SELECT * FROM eczaneler WHERE tarih = '".date("Y-m-d")."' AND ilce_id = " . $ilce_id);
     
     $eczane = $eczanelerArray->fetchAll(PDO::FETCH_ASSOC);
     for ($x = 0; $x < count($eczane); $x ++) {
@@ -22,7 +22,8 @@ for ($i = 0; $i < count($ilcelerArray); $i ++) {
             "eczacı adı" => $eczane[$x]["eczaci_adi"],
             "adres" => $eczane[$x]["adres"],
             "telefon" => $eczane[$x]["telefon"],
-            "fax" => $eczane[$x]["fax"]
+            "fax" => $eczane[$x]["fax"],
+            "tarih" => $eczane[$x]["tarih"]
         );
         
         $data[$ilce][] = $dat;
